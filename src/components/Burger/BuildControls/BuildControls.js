@@ -18,14 +18,16 @@ const BuildControls = (props) => {
         key={ctrl.type} 
         label={ctrl.label} 
         type={ctrl.type} 
-        addIngredient={() => props.addIngredient(ctrl.type)} />
+        addIngredient={() => props.addIngredient(ctrl.type)}
+        removeIngredient={() => props.removeIngredient(ctrl.type)} />
       ))}
     </div>
   )
 }
 
 BuildControl.propTypes = {
-  addIngredient: PropTypes.func
+  addIngredient: PropTypes.func,
+  removeIngredient: PropTypes.func,
 }
 
 export default BuildControls;

@@ -23,14 +23,14 @@ class BurgerBuilder extends Component {
       { type: 'cheese', number: 1},
       { type: 'meat', number: 1}
     ],
-    totalPrice: 0
+    totalPrice: 2.5
   }
 
 addIngredientHandler = (type) => {
   const updatedIngredients = [
     ...this.state.ingredients
   ]
-  updatedIngredients.map((ingredient, index) => {
+  updatedIngredients.map((ingredient) => {
     if (ingredient.type === type) {
       ingredient.number += 1;
     }
@@ -43,7 +43,28 @@ addIngredientHandler = (type) => {
   })
 }
 removeIngredientHandler = (type) => {
+  const updatedIngredients = [
+    ...this.state.ingredients
+  ]
+  // Decrese Price
+  const currenteIngredient = updatedIngredients.find((ingredient) => {
+    return ingredient.type === type
+  })
+  // console.log('currenteIngredient', currenteIngredient)
+  if (currenteIngredient.type === type && currenteIngredient.number > 0) {
+    const currentPrice = this.state.totalPrice;
+    const newPrice = currentPrice - INGREDIENTS_PRICES[type];
+    this.setState({ totalPrice: newPrice })
+  }
 
+  // Update ingredients
+  updatedIngredients.map((ingredient) => {
+    if (ingredient.type === type && ingredient.number > 0) {
+      ingredient.number -= 1;
+    }
+    return ingredient;
+  })
+  this.setState({ingredient: updatedIngredients})
 }
 
   render() {
@@ -53,7 +74,10 @@ removeIngredientHandler = (type) => {
         <div>
           <p>Price: {this.state.totalPrice}</p>
         </div>
-        <BuildControls addIngredient={this.addIngredientHandler} />
+        <BuildControls 
+          addIngredient={this.addIngredientHandler}
+          removeIngredient={this.removeIngredientHandler}
+        />
       </Aux>
     )
   }
