@@ -34,9 +34,6 @@ const Burger = ( props ) => {
     arrayIngredients = <p>Please start adding ingredients!</p>
   }
 
-  console.log('ingredient: ', props.ingredients);
-  console.log('ingredient: ', arrayIngredients);
-
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
