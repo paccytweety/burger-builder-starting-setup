@@ -8,7 +8,8 @@ const BuildControl = (props) => {
       <div className={classes.Label}>{props.label}</div>
       <button 
         className={classes.Less}
-        onClick={props.removeIngredient}>
+        onClick={props.removeIngredient}
+        disabled={props.disabled}>
       Less</button>
       <button 
         className={classes.More}
@@ -23,7 +24,8 @@ BuildControl.propTypes = {
   addIngredient: PropTypes.func,
   removeIngredient: PropTypes.func,
   label: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default BuildControl;

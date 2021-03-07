@@ -4,7 +4,7 @@ import Burger from "../../components/Burger/Burger";
 import Aux from "../../HOC/Aux";
 
 const INGREDIENTS_PRICES = {
-  salad: 0.5, cheese: 0.3, meat: 1, bacon: 0.7
+  salad: 1, cheese: 0.3, meat: 0.5, bacon: 0.7
 }
 
 class BurgerBuilder extends Component {
@@ -68,6 +68,16 @@ removeIngredientHandler = (type) => {
 }
 
   render() {
+    const currentIngredients = [
+      ...this.state.ingredients
+    ]
+    let disabledInfo = {};
+
+    currentIngredients.map((ingredient) => {
+      return disabledInfo[ingredient.type] = ingredient.number <= 0
+    })
+
+    console.log('disabledInfo',disabledInfo);
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients}/>
@@ -77,6 +87,7 @@ removeIngredientHandler = (type) => {
         <BuildControls 
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
+          disabled={disabledInfo}
         />
       </Aux>
     )

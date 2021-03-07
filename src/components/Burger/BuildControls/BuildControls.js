@@ -19,7 +19,8 @@ const BuildControls = (props) => {
         label={ctrl.label} 
         type={ctrl.type} 
         addIngredient={() => props.addIngredient(ctrl.type)}
-        removeIngredient={() => props.removeIngredient(ctrl.type)} />
+        removeIngredient={() => props.removeIngredient(ctrl.type)} 
+        disabled={props.disabled[ctrl.type]}/>
       ))}
     </div>
   )
@@ -28,6 +29,7 @@ const BuildControls = (props) => {
 BuildControl.propTypes = {
   addIngredient: PropTypes.func,
   removeIngredient: PropTypes.func,
+  disabled: PropTypes.bool
 }
 
 export default BuildControls;
