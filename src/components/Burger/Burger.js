@@ -4,33 +4,50 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import PropTypes from 'prop-types';
 
 const Burger = ( props ) => {
-  const arrayIngredients = Object.keys(props.ingredients).map(
-      igKey => {
-        return [...Array(props.ingredients[igKey])].map(
-          (_, i) => {
-            return <BurgerIngredient key={igKey + 1} type={igKey} />
-          }
-        );
-      }
-    )
-    .reduce((acc, el) => {
-      return acc.concat(el)
-    }, [])
-    console.log('ingredient: ', arrayIngredients);
+  // Max solution
+  // const arrayIngredients = Object.keys(props.ingredients).map(
+  //     igKey => {
+  //       return [...Array(props.ingredients[igKey])].map(
+  //         (_, i) => {
+  //           return <BurgerIngredient key={igKey + 1} type={igKey} />
+  //         }
+  //       );
+  //     }
+  //   )
+  //   .reduce((acc, el) => {
+  //     return acc.concat(el)
+  //   }, [])
+
+  // Patty solution
+  let arrayIngredients = [];
+  if ( props.ingredients && props.ingredients.length > 0 ) {
+    props.ingredients.map(
+      (ingredient, index) => {
+        var i = 1;
+        for (i; i <= ingredient.number; i++) {
+          arrayIngredients.push(<BurgerIngredient key={ingredient.type + i} type={ingredient.type} />);
+        }
+        return arrayIngredients;
+      }          
+    ) 
+  } else {
+    arrayIngredients = <p>Please start adding ingredients!</p>
+  }
+
+  console.log('ingredient: ', props.ingredients);
+  console.log('ingredient: ', arrayIngredients);
+
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
-      {arrayIngredients.length > 0 
-        ? arrayIngredients 
-        : <p>Please start adding ingredients!</p>
-      }
+      {arrayIngredients}
       <BurgerIngredient type="bread-bottom" />
     </div>
   );
 }
 
 Burger.propTypes = {
-  ingredients: PropTypes.object.isRequired
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default Burger;

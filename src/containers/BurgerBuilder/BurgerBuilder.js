@@ -4,12 +4,20 @@ import Aux from "../../HOC/Aux";
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 3,
-      meat: 0
-    }
+    // Max solution
+    // ingredients: {
+    //   salad: 0,
+    //   bacon: 0,
+    //   cheese: 3,
+    //   meat: 0
+    // },
+    // Patty solution
+    ingredients: [
+      { type: 'salad', number: 1},
+      { type: 'bacon', number: 2},
+      { type: 'cheese', number: 2},
+      { type: 'meat', number: 1}
+    ] 
   }
   render() {
     return (
